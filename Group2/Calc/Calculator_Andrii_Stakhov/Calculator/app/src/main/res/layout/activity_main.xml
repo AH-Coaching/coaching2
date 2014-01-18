@@ -1,7 +1,8 @@
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white">
 
     <EditText
         android:layout_width="match_parent"
@@ -11,6 +12,7 @@
         android:focusableInTouchMode="false"
         android:focusable="false"
         android:id="@+id/edtInputField"
+        android:textColor="@android:color/black"
         android:background="@drawable/edit"
         android:layout_toLeftOf="@+id/btnClear"
         android:layout_alignBottom="@+id/btnClear"
@@ -20,9 +22,9 @@
         android:id="@+id/btnClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/clip"
+        android:src="@android:drawable/ic_delete"
         android:layout_alignParentRight="true"
-        android:background="@android:color/transparent"
+        android:background="@drawable/btn_shape"
         android:padding="10dp"/>
 
     <TableLayout
@@ -37,24 +39,18 @@
             >
 
             <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                style="@style/CustomButton"
                 android:text="7"
                 android:layout_weight="1"
-                android:typeface="sans"
                 android:id="@+id/btn7"
                 android:onClick="btn7Click"
                 android:layout_column="0"/>
 
             <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                style="@style/CustomButton"
                 android:text="8"
                 android:layout_weight="1"
                 android:id="@+id/btn8"
-                android:enabled="false"
                 android:layout_column="1"/>
 
             <Button

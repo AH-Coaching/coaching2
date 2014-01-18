@@ -1,8 +1,10 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
-        <!-- Customize your theme here. -->
+    <style name="CustomButton" parent="android:Widget.Button">
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/btn_shape</item>
     </style>
 
 </resources>

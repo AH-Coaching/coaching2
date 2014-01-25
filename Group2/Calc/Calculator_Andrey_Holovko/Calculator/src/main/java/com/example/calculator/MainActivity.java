@@ -1,12 +1,15 @@
 package com.example.calculator;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
@@ -18,13 +21,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private CalculatorEngine mCalculatorEngine;
     private Boolean exprFull = false;
     private Boolean operationWas = false;
-
+    private EditText _editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_main);
+
+
         mCalculatorEngine = new CalculatorEngine();
         editText = (EditText) findViewById(R.id.edit_text);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/digital7.ttf");
+        editText.setTypeface(tf);
+
         Button btn = (Button) findViewById(R.id.btnOne);
         btn.setOnClickListener(this);
         btn = (Button) findViewById(R.id.btnTwo);
@@ -37,7 +47,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btn.setOnClickListener(this);
         btn = (Button) findViewById(R.id.btnSix);
         btn.setOnClickListener(this);
-        btn = (Button) findViewById(R.id.btnSeven);
+       btn = (Button) findViewById(R.id.btnSeven);
         btn.setOnClickListener(this);
         btn = (Button) findViewById(R.id.btnEight);
         btn.setOnClickListener(this);

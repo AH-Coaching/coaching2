@@ -5,5 +5,17 @@
 
         <!-- Customize your theme here. -->
     </style>
+    <style name="display_text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#2aff00</item>
+    </style>
+    <style name="button_style">
+        <item name="android:textSize">0sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+
+
+<!--        <item name="android:background">@drawable/jumper_up</item>
+    -->
+    </style>
     <drawable name="grey_buttons">#ff838383</drawable>
 </resources>

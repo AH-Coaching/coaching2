@@ -1,6 +1,7 @@
 package com.android_helper.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android_helper.R;
+import com.android_helper.utils.Keys;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -30,7 +32,7 @@ public class MainActivity extends ActionBarActivity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        mTitle = getString(R.string.app_name);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -40,10 +42,16 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        onSectionAttached(position);
         // update the main content by replacing fragments
+        Bundle bundle = new Bundle();
+        bundle.putInt(Keys.KEY_ID, position);
+        bundle.putString(Keys.KEY_TITLE, mTitle.toString());
+        Fragment fragment = new MainListFragment();
+        fragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, new MainListFragment())
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
@@ -57,6 +65,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            default:
+                mTitle = getString(R.string.app_name);
                 break;
         }
     }

@@ -6,7 +6,7 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:shadowColor="#E7473E"
         android:shadowRadius="10"
         android:background="@null"
@@ -18,7 +18,7 @@
         android:focusableInTouchMode="false"
         android:paddingRight="10dp"
         android:focusable="false"
-        android:textSize="@dimen/etTextSize"
+        android:textSize="30sp"
         android:id="@+id/etResult"
         android:layout_marginTop="5dp"
         android:layout_alignParentTop="true"
@@ -27,12 +27,15 @@
 
 
     <TableLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_below="@+id/etResult"
-        android:layout_alignParentEnd="false"
-        android:id="@+id/tableLayout">
+        android:id="@+id/tableLayout"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="3dp"
+        android:layout_toLeftOf="@+id/btnClear"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
         <TableRow
@@ -45,14 +48,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:shadowColor="#E7473E"
                 android:shadowRadius="10"
                 android:textStyle="italic"
                 android:textColor="@android:color/background_light"
                 android:text="@string/buttonClearMemory"
                 android:id="@+id/btnClearMemory"
-                android:textSize="@dimen/btnOperatorTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="0" />
 
@@ -60,14 +63,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:shadowColor="#E7473E"
                 android:shadowRadius="10"
                 android:text="@string/buttonAddToMemory"
                 android:textStyle="italic"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btnAddToMemory"
-                android:textSize="@dimen/btnOperatorTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="1" />
 
@@ -75,14 +78,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:shadowColor="#E7473E"
                 android:shadowRadius="10"
                 android:text="@string/buttonSubtractFromMemory"
                 android:textStyle="italic"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btnSubtractFromMemory"
-                android:textSize="@dimen/btnOperatorTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="2" />
 
@@ -90,14 +93,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:shadowColor="#E7473E"
                 android:shadowRadius="10"
                 android:text="@string/buttonRecallMemory"
                 android:textStyle="italic"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/buttonRecallMemory"
-                android:textSize="@dimen/btnOperatorTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="3" />
         </TableRow>
@@ -120,7 +123,7 @@
                 android:textColor="@android:color/background_light"
                 android:text="@string/button7"
                 android:id="@+id/btn7"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="0" />
 
@@ -134,7 +137,7 @@
                 android:text="@string/button8"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btn8"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="1" />
 
@@ -148,7 +151,7 @@
                 android:text="@string/button9"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btn9"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="2" />
 
@@ -162,7 +165,7 @@
                 android:text="@string/buttonDivide"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btnDivide"
-                android:textSize="@dimen/btnOperatorTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="3" />
         </TableRow>
@@ -184,7 +187,7 @@
                 android:text="@string/button4"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btn4"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="0" />
 
@@ -199,7 +202,7 @@
                 android:text="@string/button5"
                 android:id="@+id/btn5"
                 android:textColor="@android:color/background_light"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="1" />
 
@@ -213,7 +216,7 @@
                 android:text="@string/button6"
                 android:id="@+id/btn6"
                 android:textColor="@android:color/background_light"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="2" />
 
@@ -228,7 +231,7 @@
                 android:text="@string/buttonMultiply"
                 android:layout_weight="1"
                 android:id="@+id/btnMultiply"
-                android:textSize="@dimen/btnOperatorTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_column="3" />
 
         </TableRow>
@@ -249,7 +252,7 @@
                 android:text="@string/button1"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btn1"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="0" />
 
@@ -263,7 +266,7 @@
                 android:layout_margin="5dp"
                 android:id="@+id/btn2"
                 android:textColor="@android:color/background_light"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="1" />
 
@@ -277,7 +280,7 @@
                 android:text="@string/button3"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btn3"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="2" />
 
@@ -291,7 +294,7 @@
                 android:textColor="@android:color/background_light"
                 android:text="@string/buttonSubtract"
                 android:id="@+id/btnSubtract"
-                android:textSize="@dimen/btnOperatorTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="3" />
         </TableRow>
@@ -312,7 +315,7 @@
                 android:text="@string/buttonDot"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btnDot"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="0" />
 
@@ -326,7 +329,7 @@
                 android:text="@string/button0"
                 android:textColor="@android:color/background_light"
                 android:id="@+id/btn0"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="1" />
 
@@ -340,7 +343,7 @@
                 android:textColor="@drawable/button_clear"
                 android:text="@string/buttonResult"
                 android:id="@+id/btnResult"
-                android:textSize="@dimen/btnTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_weight="1"
                 android:layout_column="2" />
 
@@ -355,7 +358,7 @@
                 android:text="@string/buttonAdd"
                 android:layout_weight="1"
                 android:id="@+id/btnAdd"
-                android:textSize="@dimen/btnOperatorTextSize"
+                android:textSize="@dimen/btnTextSize_land"
                 android:layout_column="3" />
         </TableRow>
 
@@ -367,14 +370,14 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
         android:shadowColor="#E7473E"
         android:shadowRadius="10"
         android:textStyle="italic"
         android:textColor="@drawable/button_clear"
-        android:text="@string/buttonClear"
+        android:text="C"
         android:id="@+id/btnClear"
         android:textSize="@dimen/btnClearTextSize"
-        android:layout_below="@+id/tableLayout"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

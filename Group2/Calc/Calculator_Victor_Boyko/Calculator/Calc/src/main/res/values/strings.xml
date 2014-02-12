@@ -18,8 +18,15 @@
     <string name="buttonSubtract">-</string>
     <string name="buttonMultiply">*</string>
     <string name="buttonDivide">/</string>
-    <string name="buttonClear">DELETE</string>
+    <string name="buttonClear">Clear</string>
     <string name="buttonResult">=</string>
     <string name="division_zero">Деление на ноль</string>
+    <string name="digit_keyboard_font">fonts/flin.ttf</string>
+    <string name="buttonToggleSign">+/-</string>
+    <string name="buttonDecimalPoint">.</string>
+    <string name="buttonClearMemory">MC</string>
+    <string name="buttonAddToMemory">M+</string>
+    <string name="buttonSubtractFromMemory">M-</string>
+    <string name="buttonRecallMemory">MR</string>
 
 </resources>

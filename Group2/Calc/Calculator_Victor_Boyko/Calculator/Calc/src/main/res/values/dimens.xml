@@ -2,5 +2,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="btnTextSize">25sp</dimen>
+    <dimen name="btnTextSize">40sp</dimen>
+    <dimen name="btnClearTextSize">70sp</dimen>
+    <dimen name="btnOperatorTextSize">35sp</dimen>
+    <dimen name="etTextSize">55sp</dimen>
+    <dimen name="btnTextSize_land">30sp</dimen>
     </resources>

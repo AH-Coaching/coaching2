@@ -1,11 +1,14 @@
 package com.android_helper.ui;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android_helper.R;
+import com.android_helper.db.SQLiteContract;
 
 public class DetailsActivity extends ActionBarActivity {
 
@@ -41,12 +44,22 @@ public class DetailsActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_camera) {
-            onBackPressed();
+            fillData();
             return true;
         } else if (id == android.R.id.home) {
             onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void fillData() {
+        ContentResolver contentResolver = getContentResolver();
+
+        for (int i = 0; i < 10; i++) {
+            ContentValues values = new ContentValues();
+            values.put(SQLiteContract.Items.COLUMN_ITEM_TEXT, "Test " + i);
+            contentResolver.insert(SQLiteContract.Items.CONTENT_URI, values);
+        }
     }
 }

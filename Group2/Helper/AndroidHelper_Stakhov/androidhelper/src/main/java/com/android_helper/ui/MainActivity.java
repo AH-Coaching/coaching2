@@ -1,5 +1,7 @@
 package com.android_helper.ui;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,6 +40,7 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
     }
 
     @Override
@@ -47,7 +50,7 @@ public class MainActivity extends ActionBarActivity
         Bundle bundle = new Bundle();
         bundle.putInt(Keys.KEY_ID, position);
         bundle.putString(Keys.KEY_TITLE, mTitle.toString());
-        Fragment fragment = new MainListFragment();
+        Fragment fragment = new ListItemFragment(); //MainListFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -100,6 +103,13 @@ public class MainActivity extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            SharedPreferences sharedPreferences = getSharedPreferences("AH", 0);
+            SharedPreferences.Editor edit = sharedPreferences.edit();
+            edit.putInt("Test", 122);
+            edit.commit();
+
+            sharedPreferences.getInt("Test", 0);
+            startActivity(new Intent(this, DetailsActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

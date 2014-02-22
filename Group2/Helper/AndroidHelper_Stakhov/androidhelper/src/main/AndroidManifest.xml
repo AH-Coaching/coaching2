@@ -24,6 +24,14 @@
             android:authorities="com.android_helper.db.contentprovider"
             android:name=".db.SQLiteDataProvider"/>
 
+        <service android:name=".AHService"/>
+
+        <receiver android:name=".MyBrodcast">
+            <intent-filter>
+                <action android:name="com.ua.android_helper.androidhelper.dataAdded"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>

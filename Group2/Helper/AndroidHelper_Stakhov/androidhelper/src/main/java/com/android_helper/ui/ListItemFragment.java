@@ -103,8 +103,10 @@ public class ListItemFragment extends Fragment implements LoaderManager.LoaderCa
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Toast.makeText(context, "Need reload", Toast.LENGTH_LONG).show();
-            reload();
+            if (intent.getAction().equals("com.ua.android_helper.androidhelper.dataAdded")) {
+                Toast.makeText(context, "Need reload", Toast.LENGTH_LONG).show();
+                reload();
+            }
         }
     }
 }

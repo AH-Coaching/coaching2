@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_fragment_list">#d0d0d0</color>
+    <color name="main_fragment_list_text_color">#333333</color>
+
+</resources>

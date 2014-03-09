@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:choiceMode="singleChoice"
-    android:divider="@color/main_fragment_list"
+    android:divider="@color/navigationdrawer_devider_color"
     android:dividerHeight="1px"
-    android:background="#ededed"
-    tools:context="ua.com.androidhelper.ui.ui.MainListFragment" />
+    android:background="@color/navigationdrawer_background_color"
+    tools:context="ua.com.android_helper.taxiinfo.ui.NavigationDrawerFragment" />

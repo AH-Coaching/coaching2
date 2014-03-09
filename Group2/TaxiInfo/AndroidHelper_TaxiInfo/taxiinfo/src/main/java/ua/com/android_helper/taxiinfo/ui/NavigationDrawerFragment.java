@@ -1,9 +1,16 @@
-package ua.com.android_helper.taxiinfo;
+package ua.com.android_helper.taxiinfo.ui;
 
+
+
+
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,17 +25,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import ua.com.android_helper.taxiinfo.R;
+import ua.com.android_helper.taxiinfo.adapters.CityCursorAdapter;
+import ua.com.android_helper.taxiinfo.db.SQLiteContract;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
+    private CityCursorAdapter cursorAdapter;
     /**
      * Remember the position of the selected item.
      */
@@ -90,22 +101,22 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+                R.layout.fragment_navigationdrawer, container, false);
+
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
+        getActivity().getSupportLoaderManager().initLoader(0,null,this);
+
+
+        cursorAdapter = new CityCursorAdapter(getActivity(),null);
+        mDrawerListView.setAdapter(cursorAdapter);
+
+
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -255,6 +266,7 @@ public class NavigationDrawerFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+
     /**
      * Per the navigation drawer design guidelines, updates the action bar to show the global app
      * 'context', rather than just what's in the current screen.
@@ -268,6 +280,33 @@ public class NavigationDrawerFragment extends Fragment {
 
     private ActionBar getActionBar() {
         return ((ActionBarActivity) getActivity()).getSupportActionBar();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle args) {
+        if (args!=null){
+            String selection = SQLiteContract.City.COLUMN_CITY_ID + " = ?";
+            String[] selectionArgs = new String[]{String.valueOf(args.getInt(SQLiteContract.City.COLUMN_CITY_ID))};
+            CursorLoader cursorLoader = new CursorLoader(getActivity(), SQLiteContract.City.CONTENT_URI, null, selection, selectionArgs, null);
+            return cursorLoader;
+
+        }else {
+            return new CursorLoader(getActivity(), SQLiteContract.City.CONTENT_URI,null,null,null,null);
+        }
+        }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        if (cursorAdapter != null) {
+            cursorAdapter.swapCursor(cursor);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        if (cursorAdapter != null) {
+            cursorAdapter.swapCursor(null);
+        }
     }
 
     /**

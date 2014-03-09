@@ -1,22 +1,26 @@
-package ua.com.android_helper.taxiinfo;
+package ua.com.android_helper.taxiinfo.ui;
 
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import ua.com.android_helper.taxiinfo.utils.Keys;
+
+import ua.com.android_helper.taxiinfo.R;
+import ua.com.android_helper.taxiinfo.db.SQLiteContract;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -49,9 +53,16 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+       Bundle bundle = new Bundle();
+        bundle.putInt(Keys.KEY_ID,position);
+   //     bundle.putString(Keys.KEY_TITLE,mTitle.toString());
+
+        Fragment fragment = new MainListFragment();
+        fragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
+
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
@@ -97,51 +108,33 @@ public class MainActivity extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Toast.makeText(this,"Fill data",Toast.LENGTH_SHORT).show();
+            fillData();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    private void fillData(){
+/*
+        ContentResolver contentResolver = getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(SQLiteContract.City.COLUMN_CITY_ID,2);
+        values.put(SQLiteContract.City.COLUMN_CITY_NAME,"Test 2");
+        values.put(SQLiteContract.City.COLUMN_CITY_VERSION,1);
+        contentResolver.insert(SQLiteContract.City.CONTENT_URI,values);
+*/
+        ContentResolver contentResolver = getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(SQLiteContract.Taxiname.COLUMN_CITY_ID,2);
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME,"Taxi megasuper");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_INFO,"nichego");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE,1);
+        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI,values);
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
 
-        public PlaceholderFragment() {
-        }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
     }
+
 
 }

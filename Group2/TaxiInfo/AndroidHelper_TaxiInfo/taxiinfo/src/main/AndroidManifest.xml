@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ua.com.android_helper.taxiinfo.MainActivity"
+            android:name="ua.com.android_helper.taxiinfo.ui.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+    <provider
+        android:authorities="ua.com.android_helper.taxiinfo.db.contentprovider"
+        android:name=".db.SQLiteDataProvider"/>
     </application>
 
 </manifest>

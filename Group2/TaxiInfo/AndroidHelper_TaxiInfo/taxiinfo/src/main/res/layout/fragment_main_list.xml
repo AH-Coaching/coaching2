@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+
+   <Button
+        android:id="@+id/text_mainfragment"
+        android:layout_width="match_parent"
+        android:text="123"
+       android:layout_marginRight="20dp"
+       android:layout_marginLeft="10dp"
+       android:textSize="20sp"
+       android:gravity="left|center_vertical"
+        android:layout_height="50dp"
+        android:paddingLeft="5dp"
+        android:scaleType="center"
+       android:drawableRight="@android:drawable/sym_action_call"
+       android:background="@android:color/transparent"
+        />
+
+
+</RelativeLayout>

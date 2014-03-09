@@ -1,26 +1,20 @@
 package ua.com.android_helper.taxiinfo.ui;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import ua.com.android_helper.taxiinfo.utils.Keys;
 
 import ua.com.android_helper.taxiinfo.R;
 import ua.com.android_helper.taxiinfo.db.SQLiteContract;
+import ua.com.android_helper.taxiinfo.utils.Keys;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -51,11 +45,11 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
+    public void onNavigationDrawerItemSelected(long position) {
         // update the main content by replacing fragments
-       Bundle bundle = new Bundle();
-        bundle.putInt(Keys.KEY_ID,position);
-   //     bundle.putString(Keys.KEY_TITLE,mTitle.toString());
+        Bundle bundle = new Bundle();
+        bundle.putLong(Keys.KEY_ID, position);
+        //     bundle.putString(Keys.KEY_TITLE,mTitle.toString());
 
         Fragment fragment = new MainListFragment();
         fragment.setArguments(bundle);
@@ -108,30 +102,28 @@ public class MainActivity extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Toast.makeText(this,"Fill data",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fill data", Toast.LENGTH_SHORT).show();
             fillData();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void fillData(){
-/*
-        ContentResolver contentResolver = getContentResolver();
-        ContentValues values = new ContentValues();
-        values.put(SQLiteContract.City.COLUMN_CITY_ID,2);
-        values.put(SQLiteContract.City.COLUMN_CITY_NAME,"Test 2");
-        values.put(SQLiteContract.City.COLUMN_CITY_VERSION,1);
-        contentResolver.insert(SQLiteContract.City.CONTENT_URI,values);
-*/
-        ContentResolver contentResolver = getContentResolver();
-        ContentValues values = new ContentValues();
-        values.put(SQLiteContract.Taxiname.COLUMN_CITY_ID,2);
-        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME,"Taxi megasuper");
-        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_INFO,"nichego");
-        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE,1);
-        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI,values);
+    private void fillData() {
 
+        ContentResolver contentResolver = getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(SQLiteContract.City.COLUMN_CITY_ID, 2);
+        values.put(SQLiteContract.City.COLUMN_CITY_NAME, "Test 2");
+        values.put(SQLiteContract.City.COLUMN_CITY_VERSION, 1);
+        contentResolver.insert(SQLiteContract.City.CONTENT_URI, values);
+
+        values = new ContentValues();
+        values.put(SQLiteContract.Taxiname.COLUMN_CITY_ID, 2);
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME, "Taxi megasuper");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_INFO, "nichego");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE, 1);
+        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);
 
 
     }

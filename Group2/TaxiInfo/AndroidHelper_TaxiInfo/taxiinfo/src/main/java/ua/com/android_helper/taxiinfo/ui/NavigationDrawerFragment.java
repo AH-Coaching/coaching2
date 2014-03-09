@@ -1,23 +1,21 @@
 package ua.com.android_helper.taxiinfo.ui;
 
 
-
-
-import android.database.Cursor;
-import android.support.v7.app.ActionBarActivity;;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,12 +30,14 @@ import ua.com.android_helper.taxiinfo.R;
 import ua.com.android_helper.taxiinfo.adapters.CityCursorAdapter;
 import ua.com.android_helper.taxiinfo.db.SQLiteContract;
 
+;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class NavigationDrawerFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private CityCursorAdapter cursorAdapter;
     /**
@@ -91,7 +91,7 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
     }
 
     @Override
-    public void onActivityCreated (Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
@@ -99,7 +99,7 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigationdrawer, container, false);
 
@@ -110,10 +110,10 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
                 selectItem(position);
             }
         });
-        getActivity().getSupportLoaderManager().initLoader(0,null,this);
+        getActivity().getSupportLoaderManager().initLoader(0, null, this);
 
 
-        cursorAdapter = new CityCursorAdapter(getActivity(),null);
+        cursorAdapter = new CityCursorAdapter(getActivity(), null);
         mDrawerListView.setAdapter(cursorAdapter);
 
 
@@ -207,8 +207,8 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
-        if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(position);
+        if (mCallbacks != null && cursorAdapter != null) {
+            mCallbacks.onNavigationDrawerItemSelected(cursorAdapter.getItemId(position));
         }
     }
 
@@ -284,16 +284,16 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle args) {
-        if (args!=null){
+        if (args != null) {
             String selection = SQLiteContract.City.COLUMN_CITY_ID + " = ?";
             String[] selectionArgs = new String[]{String.valueOf(args.getInt(SQLiteContract.City.COLUMN_CITY_ID))};
             CursorLoader cursorLoader = new CursorLoader(getActivity(), SQLiteContract.City.CONTENT_URI, null, selection, selectionArgs, null);
             return cursorLoader;
 
-        }else {
-            return new CursorLoader(getActivity(), SQLiteContract.City.CONTENT_URI,null,null,null,null);
+        } else {
+            return new CursorLoader(getActivity(), SQLiteContract.City.CONTENT_URI, null, null, null, null);
         }
-        }
+    }
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
@@ -316,6 +316,6 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
         /**
          * Called when an item in the navigation drawer is selected.
          */
-        void onNavigationDrawerItemSelected(int position);
+        void onNavigationDrawerItemSelected(long position);
     }
 }

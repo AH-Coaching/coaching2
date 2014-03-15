@@ -111,7 +111,7 @@ public class MainActivity extends ActionBarActivity
 
     private void fillData() {
 
-        ContentResolver contentResolver = getContentResolver();
+        /*ContentResolver contentResolver = getContentResolver();
         ContentValues values = new ContentValues();
         values.put(SQLiteContract.City.COLUMN_CITY_ID, 2);
         values.put(SQLiteContract.City.COLUMN_CITY_NAME, "Test 2");
@@ -123,8 +123,15 @@ public class MainActivity extends ActionBarActivity
         values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME, "Taxi megasuper");
         values.put(SQLiteContract.Taxiname.COLUMN_TAXI_INFO, "nichego");
         values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE, 1);
-        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);
+        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);*/
 
+
+    /*    ContentResolver contentResolver = getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_SERVICE_ID, 2);
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_NUMBER_VALUE, "04435522078");
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_TYPE, "type1");
+        contentResolver.insert(SQLiteContract.Details.CONTENT_URI, values);*/
 
     }
 

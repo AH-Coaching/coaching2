@@ -2,17 +2,24 @@ package ua.com.android_helper.taxiinfo.ui;
 
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import ua.com.android_helper.taxiinfo.R;
 
@@ -27,13 +34,17 @@ import ua.com.android_helper.taxiinfo.utils.Keys;
  */
 public class MainListFragment extends Fragment implements AdapterView.OnItemClickListener,  LoaderManager.LoaderCallbacks<Cursor> {
 
-    private String[] list = new String[]{"Happy New Year", "Second", "Third", "Fourth", "......."};
+   /* private String[] list = new String[]{"Happy New Year", "Second", "Third", "Fourth", "......."};
     private String[] list2 = new String[]{"Test2", "Test3", "Test4", "Test5", "Test6"};
     private String[] list3 = new String[]{"Test2", "Test3", "Test4", "Test5", "Test6"};
     private String[] list4 = new String[]{"Test2", "Test3", "Test4", "Test5", "Test6"};
     private int _id;
     private String _title;
-    private TaxinameCursorAdapter _adapter;
+*/
+
+   DialogFragment dialogCall;
+   private TaxinameCursorAdapter _adapter;
+    private AHListReceiver listReceiver;
 
     public MainListFragment() {
         // Required empty public constructor
@@ -43,9 +54,10 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dialogCall = new CallDialog();
+            getActivity().getSupportLoaderManager().initLoader(1, null, this);
 
-        getActivity().getSupportLoaderManager().initLoader(1,null,this);
-        ListView listView = (ListView) inflater.inflate(R.layout.fragment_main, container, false);
+            ListView listView = (ListView) inflater.inflate(R.layout.fragment_main, container, false);
 
         _adapter = new TaxinameCursorAdapter(getActivity(),null);
         //Example how add the header
@@ -81,7 +93,7 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-       // startActivity(new Intent(getActivity(), DetailsActivity.class));
+        dialogCall.show(getFragmentManager(),"dialogCall");
     }
 
     @Override
@@ -98,6 +110,33 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        getActivity().getSupportLoaderManager().restartLoader(0, null, this);
+
+        //Registraciya broadcasta
+    //  getActivity().registerReceiver(listReceiver, new IntentFilter("ua.com.android_helper.taxiinfo.ui.dataAdded"));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().getSupportLoaderManager().destroyLoader(0);
+       getActivity().unregisterReceiver(listReceiver);
+    }
+
+    public void reload() {
+        Bundle args = new Bundle();
+//        args.putInt(SQLiteContract.Items.COLUMN_ITEM_PARENT_ID, getArguments().getInt(SQLiteContract.Items.COLUMN_ITEM_PARENT_ID));
+        args.putInt(SQLiteContract.City.COLUMN_CITY_ID, getArguments().getInt(SQLiteContract.City.COLUMN_CITY_ID));
+
+        getActivity().getSupportLoaderManager().restartLoader(0, null, this);
+    }
+
+
+
+    @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         if (_adapter != null) {
             _adapter.swapCursor(cursor);
@@ -108,6 +147,17 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         if (_adapter != null) {
             _adapter.swapCursor(null);
+        }
+    }
+
+    public class AHListReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("ua.com.android_helper.taxiinfo.ui.dataAdded")) {
+                Toast.makeText(context, "Need reload", Toast.LENGTH_LONG).show();
+                reload();
+            }
         }
     }
 }

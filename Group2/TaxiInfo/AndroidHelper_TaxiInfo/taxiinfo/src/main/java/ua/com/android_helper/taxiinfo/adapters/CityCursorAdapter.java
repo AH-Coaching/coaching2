@@ -37,9 +37,9 @@ public class CityCursorAdapter extends CursorAdapter {
         Cursor cursor = getCursor();
         if (cursor != null && cursor.moveToPosition(position)) {
             return cursor.getInt(cursor.getColumnIndex(SQLiteContract.City._ID));
+        }else {
+
+            return 0;
         }
-
-        return 0;
-
     }
 }

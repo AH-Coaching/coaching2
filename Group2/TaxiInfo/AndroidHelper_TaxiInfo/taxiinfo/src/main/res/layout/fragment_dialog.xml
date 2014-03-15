@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="singleChoice"
+        android:divider="@color/main_fragment_list"
+        android:dividerHeight="1px"
+        android:background="#ededed"
+        android:id="@+id/dlg_call"
+        android:descendantFocusability="blocksDescendants"
+        tools:context="ua.com.androidhelper.ui.ui.CallDialog" />
+    <Button
+        android:id="@+id/dialog_cancel"
+        android:layout_width="match_parent"
+        android:text="Cancel"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:gravity="center|center_vertical"
+        android:layout_height="50dp"
+        android:paddingLeft="5dp"
+        android:scaleType="center"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        />
+
+</LinearLayout>

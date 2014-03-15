@@ -22,5 +22,6 @@
         android:name=".db.SQLiteDataProvider" />
 
     </application>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
 </manifest>

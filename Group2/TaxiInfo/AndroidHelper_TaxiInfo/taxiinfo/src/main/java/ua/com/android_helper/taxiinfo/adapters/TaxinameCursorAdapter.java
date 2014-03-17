@@ -32,4 +32,24 @@ public class TaxinameCursorAdapter extends CursorAdapter {
         textView.setText(cursor.getString(cursor.getColumnIndex(SQLiteContract.Taxiname.COLUMN_TAXI_NAME)));
 
     }
+    @Override
+    public long getItemId(int position) {
+        Cursor cursor = getCursor();
+        if (cursor != null && cursor.moveToPosition(position)) {
+            return cursor.getInt(cursor.getColumnIndex(SQLiteContract.Taxiname._ID));
+
+        }
+
+        return 0;
+    }
+    @Override
+    public String getItem(int position) {
+        Cursor cursor = getCursor();
+        if (cursor != null && cursor.moveToPosition(position)) {
+            return cursor.getString(cursor.getColumnIndex(SQLiteContract.Taxiname.COLUMN_TAXI_NAME));
+
+        }
+        return "";
+        //return super.getItem(position);
+    }
 }

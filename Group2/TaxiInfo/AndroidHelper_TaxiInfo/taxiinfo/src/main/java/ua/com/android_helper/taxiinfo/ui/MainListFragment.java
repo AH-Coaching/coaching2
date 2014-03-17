@@ -1,7 +1,6 @@
 package ua.com.android_helper.taxiinfo.ui;
 
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,20 +29,12 @@ import ua.com.android_helper.taxiinfo.utils.Keys;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
- *
  */
-public class MainListFragment extends Fragment implements AdapterView.OnItemClickListener,  LoaderManager.LoaderCallbacks<Cursor> {
+public class MainListFragment extends Fragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 
-   /* private String[] list = new String[]{"Happy New Year", "Second", "Third", "Fourth", "......."};
-    private String[] list2 = new String[]{"Test2", "Test3", "Test4", "Test5", "Test6"};
-    private String[] list3 = new String[]{"Test2", "Test3", "Test4", "Test5", "Test6"};
-    private String[] list4 = new String[]{"Test2", "Test3", "Test4", "Test5", "Test6"};
-    private int _id;
-    private String _title;
-*/
 
-   DialogFragment dialogCall;
-   private TaxinameCursorAdapter _adapter;
+    DialogFragment dialogCall;
+    private TaxinameCursorAdapter _adapter;
     private AHListReceiver listReceiver;
 
     public MainListFragment() {
@@ -53,15 +44,19 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+
                              Bundle savedInstanceState) {
-        dialogCall = new CallDialog();
-            getActivity().getSupportLoaderManager().initLoader(1, null, this);
 
-            ListView listView = (ListView) inflater.inflate(R.layout.fragment_main, container, false);
+        Bundle bundle = getArguments();
+        getActivity().getSupportLoaderManager().initLoader(1, bundle, this);
 
-        _adapter = new TaxinameCursorAdapter(getActivity(),null);
+        ListView listView = (ListView) inflater.inflate(R.layout.fragment_main, container, false);
+
+        _adapter = new TaxinameCursorAdapter(getActivity(), null);
+
+
         //Example how add the header
-       // LinearLayout header = (LinearLayout)inflater.inflate(R.layout.header_list,null,false);
+        // LinearLayout header = (LinearLayout)inflater.inflate(R.layout.header_list,null,false);
         /*if (listView != null) {
             listView.addHeaderView(header);
         }*/
@@ -93,37 +88,43 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        dialogCall.show(getFragmentManager(),"dialogCall");
+        dialogCall = new CallDialog();
+        Bundle bundle = new Bundle();
+        bundle.putLong(SQLiteContract.Taxiname._ID,_adapter.getItemId(i));
+        bundle.putString(SQLiteContract.Taxiname.COLUMN_TAXI_NAME,_adapter.getItem(i));
+        dialogCall.setArguments(bundle);
+        dialogCall.show(getFragmentManager(), "dialogCall");
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle args) {
-        if (args!=null){
-            String selection = SQLiteContract.Taxiname.COLUMN_CITY_ID + " = ?";
-            String[] selectionArgs = new String[]{String.valueOf(args.getInt(SQLiteContract.Taxiname.COLUMN_CITY_ID))};
+        if (args != null) {
+
+         String selection = SQLiteContract.Taxiname.COLUMN_CITY_ID + " = ?";
+          String[] selectionArgs = new String[]{String.valueOf(args.getLong(SQLiteContract.Taxiname.COLUMN_CITY_ID))};
             CursorLoader cursorLoader = new CursorLoader(getActivity(), SQLiteContract.Taxiname.CONTENT_URI, null, selection, selectionArgs, null);
             return cursorLoader;
 
-        }else {
-            return new CursorLoader(getActivity(), SQLiteContract.Taxiname.CONTENT_URI,null,null,null,null);
+        } else {
+            return new CursorLoader(getActivity(), SQLiteContract.Taxiname.CONTENT_URI, null, null, null, null);
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        getActivity().getSupportLoaderManager().restartLoader(0, null, this);
+        Bundle bundle = getArguments();
+        getActivity().getSupportLoaderManager().restartLoader(1, bundle, this);
 
         //Registraciya broadcasta
-    //  getActivity().registerReceiver(listReceiver, new IntentFilter("ua.com.android_helper.taxiinfo.ui.dataAdded"));
+  //      getActivity().registerReceiver(listReceiver, new IntentFilter("ua.com.android_helper.taxiinfo.ui.dataAdded"));
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().getSupportLoaderManager().destroyLoader(0);
-       getActivity().unregisterReceiver(listReceiver);
+        getActivity().getSupportLoaderManager().destroyLoader(1);
+//        getActivity().unregisterReceiver(listReceiver);
     }
 
     public void reload() {
@@ -131,9 +132,8 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
 //        args.putInt(SQLiteContract.Items.COLUMN_ITEM_PARENT_ID, getArguments().getInt(SQLiteContract.Items.COLUMN_ITEM_PARENT_ID));
         args.putInt(SQLiteContract.City.COLUMN_CITY_ID, getArguments().getInt(SQLiteContract.City.COLUMN_CITY_ID));
 
-        getActivity().getSupportLoaderManager().restartLoader(0, null, this);
+        getActivity().getSupportLoaderManager().restartLoader(1, null, this);
     }
-
 
 
     @Override

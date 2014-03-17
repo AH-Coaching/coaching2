@@ -38,17 +38,21 @@ public class MainActivity extends ActionBarActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
+
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+                onNavigationDrawerItemSelected(1);
     }
+
 
     @Override
     public void onNavigationDrawerItemSelected(long position) {
         // update the main content by replacing fragments
         Bundle bundle = new Bundle();
-        bundle.putLong(Keys.KEY_ID, position);
+        bundle.putLong(SQLiteContract.City.COLUMN_CITY_ID, position);
+
         //     bundle.putString(Keys.KEY_TITLE,mTitle.toString());
 
         Fragment fragment = new MainListFragment();
@@ -74,11 +78,13 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+
+
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+       // actionBar.setTitle(mTitle);
     }
 
 

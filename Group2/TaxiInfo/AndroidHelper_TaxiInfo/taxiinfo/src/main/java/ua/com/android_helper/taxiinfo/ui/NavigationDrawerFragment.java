@@ -95,6 +95,7 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
         super.onActivityCreated(savedInstanceState);
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -164,6 +165,7 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
 
             @Override
             public void onDrawerOpened(View drawerView) {
+
                 super.onDrawerOpened(drawerView);
                 if (!isAdded()) {
                     return;
@@ -178,7 +180,9 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
+
                 getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getActionBar().setTitle(getString(R.string.ondrawer_title));
             }
         };
 
@@ -208,7 +212,10 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
         if (mCallbacks != null && cursorAdapter != null) {
+            getActionBar().setTitle(cursorAdapter.getItem(position));
+
             mCallbacks.onNavigationDrawerItemSelected(cursorAdapter.getItemId(position));
+
         }
     }
 
@@ -275,7 +282,7 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
+        //actionBar.setTitle(R.string.app_name);
     }
 
     private ActionBar getActionBar() {
@@ -291,6 +298,8 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
             return cursorLoader;
 
         } else {
+
+
             return new CursorLoader(getActivity(), SQLiteContract.City.CONTENT_URI, null, null, null, null);
         }
     }

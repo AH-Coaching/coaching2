@@ -3,6 +3,7 @@ package ua.com.android_helper.taxiinfo.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +38,20 @@ public class CityCursorAdapter extends CursorAdapter {
         Cursor cursor = getCursor();
         if (cursor != null && cursor.moveToPosition(position)) {
             return cursor.getInt(cursor.getColumnIndex(SQLiteContract.City._ID));
-        }else {
+
+        }
 
             return 0;
+    }
+
+    @Override
+    public String getItem(int position) {
+        Cursor cursor = getCursor();
+        if (cursor != null && cursor.moveToPosition(position)) {
+            return cursor.getString(cursor.getColumnIndex(SQLiteContract.City.COLUMN_CITY_NAME));
+
         }
+        return "";
+        //return super.getItem(position);
     }
 }

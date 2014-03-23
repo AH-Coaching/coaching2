@@ -13,6 +13,7 @@ import java.util.Map;
 public class ServiceInfo implements IServerInfo {
     private int mId;
     private Map<String, String> map;
+    private String _name;
 
     @Override
     public int getId() {
@@ -35,5 +36,13 @@ public class ServiceInfo implements IServerInfo {
     @Override
     public String getValueByKey(String key) {
         return map.get(key);
+    }
+
+    public String getName() {
+        return _name;
+    }
+
+    public void setName(String name) {
+        this._name = name;
     }
 }

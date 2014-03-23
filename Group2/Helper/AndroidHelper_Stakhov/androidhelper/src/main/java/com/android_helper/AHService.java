@@ -1,11 +1,13 @@
 package com.android_helper;
 
 import android.app.IntentService;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.android_helper.db.SQLiteContract;
 import com.android_helper.utils.Constants;
 import com.android_helper.utils.ServiceInfo;
 import com.android_helper.utils.TaxiService;
@@ -67,14 +69,21 @@ public class AHService extends IntentService {
         TaxiService taxiService = parseJson(jsonResult);
 
         // Fill data in DB
-//        populateCity(taxiService.getServiceInfoMap());
+        populateCity(taxiService.getServiceInfoMap());
 
         Intent intBrodcast = new Intent("com.ua.android_helper.androidhelper.dataAdded");
         sendBroadcast(intBrodcast);
     }
 
-    private void populateCity(List<ServiceInfo> map) {
-        // Fill data in DB
+    private void populateCity(List<ServiceInfo> list) {
+
+        for (ServiceInfo item : list) {
+            ContentValues values = new ContentValues();
+            values.put(SQLiteContract.Items.COLUMN_ITEM_TEXT, item.getName());
+
+            getContentResolver().insert(SQLiteContract.Items.CONTENT_URI, values);
+        }
+
     }
 
     private String getInfoFromServer(String url, Map<String, String> params) {
@@ -154,6 +163,7 @@ public class AHService extends IntentService {
                     ServiceInfo serviceInfo = new ServiceInfo();
                     serviceInfo.setId(id);
                     serviceInfo.setValue(String.valueOf(id), name);
+                    serviceInfo.setName(name);
                     taxiService.addServiceInfoMap(serviceInfo);
 
                 } // End Loop

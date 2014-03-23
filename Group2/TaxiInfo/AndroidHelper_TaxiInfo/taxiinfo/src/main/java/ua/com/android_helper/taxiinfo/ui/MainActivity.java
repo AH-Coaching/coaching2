@@ -2,7 +2,6 @@ package ua.com.android_helper.taxiinfo.ui;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import ua.com.android_helper.taxiinfo.R;
 import ua.com.android_helper.taxiinfo.db.SQLiteContract;
-import ua.com.android_helper.taxiinfo.utils.Keys;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -44,7 +42,9 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-                onNavigationDrawerItemSelected(1);
+        onNavigationDrawerItemSelected(1);
+
+//        startService(new Intent(this, SERVICE.class));
     }
 
 
@@ -78,12 +78,11 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
-       // actionBar.setTitle(mTitle);
+        // actionBar.setTitle(mTitle);
     }
 
 
@@ -110,7 +109,7 @@ public class MainActivity extends ActionBarActivity
             Toast.makeText(this, "Fill data", Toast.LENGTH_SHORT).show();
             fillData();
             return true;
-        }else   if (id == R.id.add_service) {
+        } else if (id == R.id.add_service) {
             Fragment fragment = new AddService();
             FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -126,10 +125,10 @@ public class MainActivity extends ActionBarActivity
 
     private void fillData() {
 
-       ContentResolver contentResolver = getContentResolver();
+        ContentResolver contentResolver = getContentResolver();
         ContentValues values = new ContentValues();
 
-        contentResolver.delete(SQLiteContract.City.CONTENT_URI,null,null);
+        contentResolver.delete(SQLiteContract.City.CONTENT_URI, null, null);
         values.put(SQLiteContract.City._ID, 1);
         values.put(SQLiteContract.City.COLUMN_CITY_ID, 1);
         values.put(SQLiteContract.City.COLUMN_CITY_NAME, "Винниица");
@@ -142,7 +141,7 @@ public class MainActivity extends ActionBarActivity
         values.put(SQLiteContract.City.COLUMN_CITY_VERSION, 1);
         contentResolver.insert(SQLiteContract.City.CONTENT_URI, values);
 
-        contentResolver.delete(SQLiteContract.Taxiname.CONTENT_URI,null,null);
+        contentResolver.delete(SQLiteContract.Taxiname.CONTENT_URI, null, null);
         values = new ContentValues();
         values.put(SQLiteContract.Taxiname._ID, 2);
         values.put(SQLiteContract.Taxiname.COLUMN_CITY_ID, 2);
@@ -169,7 +168,7 @@ public class MainActivity extends ActionBarActivity
         values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE, 1);
         contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);
 
-        contentResolver.delete(SQLiteContract.Details.CONTENT_URI,null,null);
+        contentResolver.delete(SQLiteContract.Details.CONTENT_URI, null, null);
         values = new ContentValues();
 
         values.put(SQLiteContract.Details.COLUMN_DETAILS_SERVICE_ID, 2);

@@ -3,7 +3,6 @@ package ua.com.android_helper.taxiinfo.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,10 @@ import ua.com.android_helper.taxiinfo.db.SQLiteContract;
 /**
  * Created by andreyholovko on 3/8/14.
  */
-public class CityCursorAdapter extends CursorAdapter {
+public class CityCursorAdapterSpinner extends CursorAdapter {
 
 
-    public CityCursorAdapter(Context context, Cursor c) {
+    public CityCursorAdapterSpinner(Context context, Cursor c) {
         super(context, c, true);
     }
 

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Spinner;
 
 import ua.com.android_helper.taxiinfo.R;
 import ua.com.android_helper.taxiinfo.adapters.CityCursorAdapterSpinner;
@@ -33,9 +32,9 @@ public class AddService extends Fragment implements View.OnClickListener, Loader
 
 
         cursorAdapter = new CityCursorAdapterSpinner(getActivity(), null);
-      //  Spinner spinner = (Spinner) view.findViewById(R.id.city_choose);
-
-      //  spinner.setAdapter(cursorAdapter);
+//        Spinner spinner = (Spinner) view.findViewById(R.id.city_choose);
+//
+//        spinner.setAdapter(cursorAdapter);
 
 
         Button button = (Button) view.findViewById(R.id.btn_newcity);
@@ -46,13 +45,14 @@ public class AddService extends Fragment implements View.OnClickListener, Loader
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_newcity:
-               DialogFragment dialogAddCity = new AddCityDialog();
+                DialogFragment dialogAddCity = new AddCityDialog();
                 dialogAddCity.show(getFragmentManager(), "dialogCall");
                 break;
         }
     }
+
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle args) {
         if (args != null) {

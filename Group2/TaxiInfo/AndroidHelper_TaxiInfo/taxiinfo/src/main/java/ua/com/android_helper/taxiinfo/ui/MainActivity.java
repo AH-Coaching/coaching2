@@ -126,27 +126,65 @@ public class MainActivity extends ActionBarActivity
 
     private void fillData() {
 
-        /*ContentResolver contentResolver = getContentResolver();
+       ContentResolver contentResolver = getContentResolver();
         ContentValues values = new ContentValues();
-        values.put(SQLiteContract.City.COLUMN_CITY_ID, 2);
-        values.put(SQLiteContract.City.COLUMN_CITY_NAME, "Test 2");
+
+        contentResolver.delete(SQLiteContract.City.CONTENT_URI,null,null);
+        values.put(SQLiteContract.City._ID, 1);
+        values.put(SQLiteContract.City.COLUMN_CITY_ID, 1);
+        values.put(SQLiteContract.City.COLUMN_CITY_NAME, "Винниица");
         values.put(SQLiteContract.City.COLUMN_CITY_VERSION, 1);
         contentResolver.insert(SQLiteContract.City.CONTENT_URI, values);
 
+        values.put(SQLiteContract.City._ID, 2);
+        values.put(SQLiteContract.City.COLUMN_CITY_ID, 2);
+        values.put(SQLiteContract.City.COLUMN_CITY_NAME, "Киев");
+        values.put(SQLiteContract.City.COLUMN_CITY_VERSION, 1);
+        contentResolver.insert(SQLiteContract.City.CONTENT_URI, values);
+
+        contentResolver.delete(SQLiteContract.Taxiname.CONTENT_URI,null,null);
         values = new ContentValues();
+        values.put(SQLiteContract.Taxiname._ID, 2);
         values.put(SQLiteContract.Taxiname.COLUMN_CITY_ID, 2);
-        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME, "Taxi megasuper");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME, "Киевтакс2");
         values.put(SQLiteContract.Taxiname.COLUMN_TAXI_INFO, "nichego");
         values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE, 1);
-        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);*/
+        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);
+        values.put(SQLiteContract.Taxiname._ID, 1);
+        values.put(SQLiteContract.Taxiname.COLUMN_CITY_ID, 2);
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME, "Киевтакс1");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_INFO, "nichego");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE, 2);
+        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);
+        values.put(SQLiteContract.Taxiname._ID, 4);
+        values.put(SQLiteContract.Taxiname.COLUMN_CITY_ID, 1);
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME, "Винтакс2");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_INFO, "nichego");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE, 1);
+        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);
+        values.put(SQLiteContract.Taxiname._ID, 3);
+        values.put(SQLiteContract.Taxiname.COLUMN_CITY_ID, 1);
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_NAME, "Винтакс1");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_INFO, "nichego");
+        values.put(SQLiteContract.Taxiname.COLUMN_TAXI_RATE, 1);
+        contentResolver.insert(SQLiteContract.Taxiname.CONTENT_URI, values);
 
+        contentResolver.delete(SQLiteContract.Details.CONTENT_URI,null,null);
+        values = new ContentValues();
 
-    /*    ContentResolver contentResolver = getContentResolver();
-        ContentValues values = new ContentValues();
         values.put(SQLiteContract.Details.COLUMN_DETAILS_SERVICE_ID, 2);
         values.put(SQLiteContract.Details.COLUMN_DETAILS_NUMBER_VALUE, "04435522078");
         values.put(SQLiteContract.Details.COLUMN_DETAILS_TYPE, "type1");
-        contentResolver.insert(SQLiteContract.Details.CONTENT_URI, values);*/
+        contentResolver.insert(SQLiteContract.Details.CONTENT_URI, values);
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_SERVICE_ID, 2);
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_NUMBER_VALUE, "04435522555");
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_TYPE, "type2");
+        contentResolver.insert(SQLiteContract.Details.CONTENT_URI, values);
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_SERVICE_ID, 3);
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_NUMBER_VALUE, "04325522555");
+        values.put(SQLiteContract.Details.COLUMN_DETAILS_TYPE, "type2");
+        contentResolver.insert(SQLiteContract.Details.CONTENT_URI, values);
+
 
     }
 

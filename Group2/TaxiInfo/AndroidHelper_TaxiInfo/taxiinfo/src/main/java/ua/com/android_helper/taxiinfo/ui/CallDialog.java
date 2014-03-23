@@ -27,7 +27,6 @@ import ua.com.android_helper.taxiinfo.db.SQLiteContract;
  * Created by andreyholovko on 3/13/14.
  */
 public class CallDialog extends DialogFragment implements AdapterView.OnItemClickListener , LoaderManager.LoaderCallbacks<Cursor> {
-    private String[] list = new String[]{"Test2", "Test3", "Test4", "Test5", "Test6"};
     private ListView listView;
     private PhoneCursorAdapter _adapter;
     @Override
@@ -62,10 +61,6 @@ public class CallDialog extends DialogFragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+_adapter.getItem((_adapter.getItemPosition(l)))));
        startActivity(intent);
-
-       // Toast.makeText(getActivity(),""+_adapter.getItem((_adapter.getItemPosition(l))),Toast.LENGTH_SHORT).show();
-
-
     }
 
     @Override

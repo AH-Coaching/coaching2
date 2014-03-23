@@ -22,5 +22,7 @@
     <string name="label_tel2">Телефон 2:</string>
     <string name="label_tel1">Телефон 1:</string>
     <string name="label_name">Название:</string>
+    <string name="label_addcity">Введите город</string>
+
 
 </resources>

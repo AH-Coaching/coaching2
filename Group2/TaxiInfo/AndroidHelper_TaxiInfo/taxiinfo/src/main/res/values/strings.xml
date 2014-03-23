@@ -7,11 +7,20 @@
     <string name="title_section3">Section 3</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+    <string name="add_service">Добавить такси</string>
+    <string name="action_settings">Fill data</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="ondrawer_title">Выберите город</string>
+    <string name="add_city">Новый</string>
+    <string name="header_choosecity">Выберите город</string>
+    <string name="btn_sendforadd_text">Отправить на добавление</string>
+    <string name="label_tel5">Телефон 5:</string>
+    <string name="label_tel4">Телефон 4:</string>
+    <string name="label_tel3">Телефон 3:</string>
+    <string name="label_tel2">Телефон 2:</string>
+    <string name="label_tel1">Телефон 1:</string>
+    <string name="label_name">Название:</string>
 
 </resources>

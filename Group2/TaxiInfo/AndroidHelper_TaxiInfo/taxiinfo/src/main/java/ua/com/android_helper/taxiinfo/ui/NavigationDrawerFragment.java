@@ -265,7 +265,7 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
+        if (item.getItemId() == R.id.add_service) {
             Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }

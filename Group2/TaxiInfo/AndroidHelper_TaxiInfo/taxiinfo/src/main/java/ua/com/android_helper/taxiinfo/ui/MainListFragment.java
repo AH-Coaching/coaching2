@@ -65,33 +65,13 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
         return listView;
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-/*
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            _id = bundle.getInt(Keys.KEY_ID);
-            _title = bundle.getString(Keys.KEY_TITLE);
-            ((MainActivity) getActivity()).getSupportActionBar().setSubtitle(_title);
-        }*/
-
-    /*    if (_id == 0) {
-            _adapter.filllist(Arrays.asList(list));
-        }else if (_id == 1) {
-            _adapter.filllist(Arrays.asList(list2));
-        }else if (_id == 2) {
-            _adapter.filllist(Arrays.asList(list3));
-        } else {
-            _adapter.filllist(Arrays.asList(list4));
-        }*/
-    }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         dialogCall = new CallDialog();
         Bundle bundle = new Bundle();
-        bundle.putLong(SQLiteContract.Taxiname._ID,_adapter.getItemId(i));
-        bundle.putString(SQLiteContract.Taxiname.COLUMN_TAXI_NAME,_adapter.getItem(i));
+        bundle.putLong(SQLiteContract.Taxiname._ID, _adapter.getItemId(i));
+        bundle.putString(SQLiteContract.Taxiname.COLUMN_TAXI_NAME, _adapter.getItem(i));
         dialogCall.setArguments(bundle);
         dialogCall.show(getFragmentManager(), "dialogCall");
     }
@@ -100,8 +80,8 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
     public Loader<Cursor> onCreateLoader(int i, Bundle args) {
         if (args != null) {
 
-         String selection = SQLiteContract.Taxiname.COLUMN_CITY_ID + " = ?";
-          String[] selectionArgs = new String[]{String.valueOf(args.getLong(SQLiteContract.Taxiname.COLUMN_CITY_ID))};
+            String selection = SQLiteContract.Taxiname.COLUMN_CITY_ID + " = ?";
+            String[] selectionArgs = new String[]{String.valueOf(args.getLong(SQLiteContract.Taxiname.COLUMN_CITY_ID))};
             CursorLoader cursorLoader = new CursorLoader(getActivity(), SQLiteContract.Taxiname.CONTENT_URI, null, selection, selectionArgs, null);
             return cursorLoader;
 
@@ -117,7 +97,7 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
         getActivity().getSupportLoaderManager().restartLoader(1, bundle, this);
 
         //Registraciya broadcasta
-  //      getActivity().registerReceiver(listReceiver, new IntentFilter("ua.com.android_helper.taxiinfo.ui.dataAdded"));
+        //      getActivity().registerReceiver(listReceiver, new IntentFilter("ua.com.android_helper.taxiinfo.ui.dataAdded"));
     }
 
     @Override

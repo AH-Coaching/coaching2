@@ -2,6 +2,7 @@ package ua.com.android_helper.taxiinfo.ui;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -52,8 +53,6 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         Bundle bundle = new Bundle();
         bundle.putLong(SQLiteContract.City.COLUMN_CITY_ID, position);
-
-        //     bundle.putString(Keys.KEY_TITLE,mTitle.toString());
 
         Fragment fragment = new MainListFragment();
         fragment.setArguments(bundle);
@@ -110,6 +109,16 @@ public class MainActivity extends ActionBarActivity
         if (id == R.id.action_settings) {
             Toast.makeText(this, "Fill data", Toast.LENGTH_SHORT).show();
             fillData();
+            return true;
+        }else   if (id == R.id.add_service) {
+            Fragment fragment = new AddService();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+
+            fragmentManager.beginTransaction().addToBackStack("addservice")
+                    .replace(R.id.container, fragment)
+                    .commit();
+
+
             return true;
         }
         return super.onOptionsItemSelected(item);

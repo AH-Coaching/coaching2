@@ -4,5 +4,6 @@
     <color name="navigationdrawer_background_color">#f5f5f5</color>
     <color name="navigationdrawer_devider_color">#cfcfcf</color>
     <color name="main_fragment_list_text_color">#333333</color>
+    <color name="header_text_color">#333333</color>
 
 </resources>

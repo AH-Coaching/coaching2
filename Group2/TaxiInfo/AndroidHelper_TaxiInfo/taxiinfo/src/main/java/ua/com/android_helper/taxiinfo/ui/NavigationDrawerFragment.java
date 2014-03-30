@@ -327,4 +327,8 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
          */
         void onNavigationDrawerItemSelected(long position);
     }
+
+    public void reload() {
+        getActivity().getSupportLoaderManager().restartLoader(0, null, this);
+    }
 }

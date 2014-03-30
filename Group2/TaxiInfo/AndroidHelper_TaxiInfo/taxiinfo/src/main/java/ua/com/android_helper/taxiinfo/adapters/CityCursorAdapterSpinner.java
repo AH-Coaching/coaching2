@@ -6,6 +6,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import ua.com.android_helper.taxiinfo.R;
@@ -28,8 +29,8 @@ public class CityCursorAdapterSpinner extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-            TextView textView = (TextView) view.findViewById(R.id.txt_item);
-            textView.setText(cursor.getString(cursor.getColumnIndex(SQLiteContract.City.COLUMN_CITY_NAME)));
+            Spinner spinner = (Spinner) view.findViewById(R.id.city_choose);
+       // spinner.setText(cursor.getString(cursor.getColumnIndex(SQLiteContract.City.COLUMN_CITY_NAME)));
         }
 
     @Override

@@ -17,11 +17,21 @@
             </intent-filter>
         </activity>
 
-    <provider
-        android:authorities="ua.com.android_helper.taxiinfo.db.contentprovider"
-        android:name=".db.SQLiteDataProvider" />
+        <provider
+            android:name="ua.com.android_helper.taxiinfo.db.SQLiteDataProvider"
+            android:authorities="ua.com.android_helper.taxiinfo.db.contentprovider" />
 
+        <service
+            android:name="ua.com.android_helper.taxiinfo.TiService"
+             >
+        </service>
+ <receiver android:name=".MyBroadcast">
+     <intent-filter>
+         <action android:name="ua.com.android_helper.taxiinfo.cityadd"></action>
+     </intent-filter>
+ </receiver>
     </application>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>

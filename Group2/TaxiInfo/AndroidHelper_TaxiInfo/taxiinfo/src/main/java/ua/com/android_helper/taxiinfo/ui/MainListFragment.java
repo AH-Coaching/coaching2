@@ -9,10 +9,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,6 @@ import ua.com.android_helper.taxiinfo.R;
 
 import ua.com.android_helper.taxiinfo.adapters.TaxinameCursorAdapter;
 import ua.com.android_helper.taxiinfo.db.SQLiteContract;
-import ua.com.android_helper.taxiinfo.utils.Keys;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -54,14 +55,10 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
 
         _adapter = new TaxinameCursorAdapter(getActivity(), null);
 
-
-        //Example how add the header
-        // LinearLayout header = (LinearLayout)inflater.inflate(R.layout.header_list,null,false);
-        /*if (listView != null) {
-            listView.addHeaderView(header);
-        }*/
         listView.setAdapter(_adapter);
         listView.setOnItemClickListener(this);
+
+        listReceiver = new AHListReceiver();
         return listView;
     }
 
@@ -97,22 +94,27 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
         getActivity().getSupportLoaderManager().restartLoader(1, bundle, this);
 
         //Registraciya broadcasta
-        //      getActivity().registerReceiver(listReceiver, new IntentFilter("ua.com.android_helper.taxiinfo.ui.dataAdded"));
+        getActivity().registerReceiver(listReceiver, new IntentFilter("ua.com.android_helper.taxiinfo.cityadd"));
     }
 
     @Override
     public void onPause() {
         super.onPause();
         getActivity().getSupportLoaderManager().destroyLoader(1);
-//        getActivity().unregisterReceiver(listReceiver);
+       getActivity().unregisterReceiver(listReceiver);
     }
 
     public void reload() {
         Bundle args = new Bundle();
-//        args.putInt(SQLiteContract.Items.COLUMN_ITEM_PARENT_ID, getArguments().getInt(SQLiteContract.Items.COLUMN_ITEM_PARENT_ID));
-        args.putInt(SQLiteContract.City.COLUMN_CITY_ID, getArguments().getInt(SQLiteContract.City.COLUMN_CITY_ID));
 
-        getActivity().getSupportLoaderManager().restartLoader(1, null, this);
+        args.putLong(SQLiteContract.City.COLUMN_CITY_ID, 1);
+
+        getActivity().getSupportLoaderManager().restartLoader(1, args, this);
+
+        NavigationDrawerFragment mNavigationDrawerFragment;
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+
+        mNavigationDrawerFragment.reload();
     }
 
 
@@ -134,8 +136,8 @@ public class MainListFragment extends Fragment implements AdapterView.OnItemClic
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals("ua.com.android_helper.taxiinfo.ui.dataAdded")) {
-                Toast.makeText(context, "Need reload", Toast.LENGTH_LONG).show();
+            if (intent.getAction().equals("ua.com.android_helper.taxiinfo.cityadd")) {
+               // Toast.makeText(context, "Need reload", Toast.LENGTH_LONG).show();
                 reload();
             }
         }

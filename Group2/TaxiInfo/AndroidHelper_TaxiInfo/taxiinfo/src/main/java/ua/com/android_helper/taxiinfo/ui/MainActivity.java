@@ -2,6 +2,7 @@ package ua.com.android_helper.taxiinfo.ui;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import ua.com.android_helper.taxiinfo.R;
+import ua.com.android_helper.taxiinfo.TiService;
 import ua.com.android_helper.taxiinfo.db.SQLiteContract;
 
 public class MainActivity extends ActionBarActivity
@@ -116,11 +118,19 @@ public class MainActivity extends ActionBarActivity
             fragmentManager.beginTransaction().addToBackStack("addservice")
                     .replace(R.id.container, fragment)
                     .commit();
-
-
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        else if (id == R.id.test_service) {
+           startService(new Intent(this, TiService.class));
+            return true;
+        }
+        else if (id == R.id.delete_db) {
+            ContentResolver contentResolver = getContentResolver();
+            contentResolver.delete(SQLiteContract.City.CONTENT_URI, null, null);
+            return true;
+        }
+
+            return super.onOptionsItemSelected(item);
     }
 
     private void fillData() {

@@ -3,12 +3,14 @@ package ua.com.android_helper.taxiinfo.ui;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -35,6 +37,15 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Cursor c = getContentResolver().query(SQLiteContract.City.CONTENT_URI, null,null, null, null);
+        if (c != null) {
+
+            if(c.getCount() == 0) {
+                startService(new Intent(this, TiService.class));
+                // not found in database
+            }
+        }
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -44,6 +55,7 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
         onNavigationDrawerItemSelected(1);
 
 //        startService(new Intent(this, SERVICE.class));
@@ -107,11 +119,12 @@ public class MainActivity extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+      /*  if (id == R.id.action_settings) {
             Toast.makeText(this, "Fill data", Toast.LENGTH_SHORT).show();
             fillData();
             return true;
-        } else if (id == R.id.add_service) {
+        } else*/
+        if (id == R.id.add_service) {
             Fragment fragment = new AddService();
             FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -120,20 +133,24 @@ public class MainActivity extends ActionBarActivity
                     .commit();
             return true;
         }
-        else if (id == R.id.test_service) {
+       /* else if (id == R.id.test_service) {
            startService(new Intent(this, TiService.class));
             return true;
         }
         else if (id == R.id.delete_db) {
             ContentResolver contentResolver = getContentResolver();
             contentResolver.delete(SQLiteContract.City.CONTENT_URI, null, null);
+            contentResolver.delete(SQLiteContract.Taxiname.CONTENT_URI, null, null);
+            contentResolver.delete(SQLiteContract.Details.CONTENT_URI, null, null);
+
+
             return true;
-        }
+        }*/
 
             return super.onOptionsItemSelected(item);
     }
 
-    private void fillData() {
+  /*  private void fillData() {
 
         ContentResolver contentResolver = getContentResolver();
         ContentValues values = new ContentValues();
@@ -195,7 +212,7 @@ public class MainActivity extends ActionBarActivity
         contentResolver.insert(SQLiteContract.Details.CONTENT_URI, values);
 
 
-    }
+    }*/
 
 
 }

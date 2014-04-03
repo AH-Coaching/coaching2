@@ -59,7 +59,9 @@ public class CallDialog extends DialogFragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-       Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+_adapter.getItem((_adapter.getItemPosition(l)))));
+       String st=_adapter.getItem((_adapter.getItemPosition(l)));
+        st= st.replace("(","").replace(")","").replace(" ","").replace("-","");
+       Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+st));
        startActivity(intent);
     }
 

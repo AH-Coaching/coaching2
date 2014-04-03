@@ -1,5 +1,6 @@
 package ua.com.android_helper.taxiinfo.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +10,10 @@ import java.util.Map;
 public class ServiceInfo implements IServerInfo {
     //city
     private int mId;
+    private int cId; //city_id
+    private int rate;
     private int mVersion;
+    private ArrayList<HashMap<String, String>> details;
     private String _name;
     //taxiservice
     private Map<String, String> map;
@@ -47,12 +51,45 @@ public class ServiceInfo implements IServerInfo {
     public String getValueByKey(String key) {
         return map.get(key);
     }
-
+    @Override
     public String getName() {
         return _name;
     }
 
+    @Override
     public void setName(String name) {
         this._name = name;
+    }
+
+    @Override
+    public void setCityID(int cityID) {
+     this.cId=cityID;
+    }
+
+    @Override
+    public int getCityId() {
+        return cId;
+    }
+
+    @Override
+    public int getTaxiRate() {
+        return rate;
+    }
+
+    @Override
+    public void setTaxiRate(int taxiRate) {
+    this.rate=taxiRate;
+    }
+
+
+    public void setDetails (HashMap<String,String> det) {
+        if(details==null){
+            details = new ArrayList<HashMap<String, String>>();
+        }
+        this.details.add(det);
+    }
+
+    public ArrayList<HashMap<String, String>> getDetails(){
+        return details;
     }
 }

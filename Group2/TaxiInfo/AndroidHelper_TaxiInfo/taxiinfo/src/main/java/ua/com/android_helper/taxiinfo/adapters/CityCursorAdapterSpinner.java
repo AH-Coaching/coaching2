@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Set;
+
 import ua.com.android_helper.taxiinfo.R;
 import ua.com.android_helper.taxiinfo.db.SQLiteContract;
 
@@ -54,4 +56,6 @@ public class CityCursorAdapterSpinner extends CursorAdapter {
         return "";
         //return super.getItem(position);
     }
+
+
 }

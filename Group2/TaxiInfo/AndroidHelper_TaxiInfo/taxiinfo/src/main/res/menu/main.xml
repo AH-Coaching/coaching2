@@ -5,16 +5,18 @@
     <item android:id="@+id/add_service"
         android:title="@string/add_service"
         app:showAsAction="never" />
-    <item android:id="@+id/action_settings"
+    <!--<item android:id="@+id/test_service"
+        android:title="Test service"
+        android:icon="@android:drawable/ic_menu_more"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+ &lt;!&ndash;   <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never" />
-    <item android:id="@+id/test_service"
-        android:title="Test service"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+
     <item android:id="@+id/delete_db"
         android:title="Delete DB"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:showAsAction="never" />&ndash;&gt;-->
 </menu>

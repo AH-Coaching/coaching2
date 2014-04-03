@@ -51,7 +51,16 @@ public class CityCursorAdapter extends CursorAdapter {
             return cursor.getString(cursor.getColumnIndex(SQLiteContract.City.COLUMN_CITY_NAME));
 
         }
-        return "";
+            return "";
+
+
         //return super.getItem(position);
+    }
+    public int checkDB(){
+        Cursor cursor = getCursor();
+        if (!cursor.moveToFirst()){
+            return 0;
+        }
+        return 1;
     }
 }

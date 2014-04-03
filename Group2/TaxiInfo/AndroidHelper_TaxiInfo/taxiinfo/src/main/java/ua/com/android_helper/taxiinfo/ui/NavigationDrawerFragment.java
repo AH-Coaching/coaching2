@@ -115,6 +115,7 @@ public class NavigationDrawerFragment extends Fragment implements LoaderManager.
 
 
         cursorAdapter = new CityCursorAdapter(getActivity(), null);
+
         mDrawerListView.setAdapter(cursorAdapter);
 
 
